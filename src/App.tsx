@@ -33,6 +33,8 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const [showCookies, setShowCookies] = useState(() => !localStorage.getItem('cookie_consent'));
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
+  const [sliderPos, setSliderPos] = useState(50);
 
   return (
     <main className="min-h-screen bg-[#f3fbff] font-gilroy text-[#2d2d2d]">
@@ -96,7 +98,7 @@ export default function App() {
             <p className="mb-8 text-center text-sm font-medium uppercase tracking-[0.26em] text-[#7e6f67]">
               Γυθείου 22, Χαλάνδρι
             </p>
-            <h1 className="mx-auto max-w-[1380px] text-center text-[15vw] font-extralight uppercase leading-[0.82] tracking-[-0.08em] sm:text-[11vw] lg:text-[8.5rem]">
+            <h1 className="mx-auto max-w-[1380px] text-center text-[12vw] font-extralight uppercase leading-[0.82] tracking-[-0.08em] sm:text-[11vw] lg:text-[8.5rem]">
               Χαμόγελα
               <span className="mx-5 inline-block text-[0.32em] font-light normal-case italic tracking-[-0.04em] text-[#7e6f67]">
                 που νιώθουν
@@ -139,18 +141,18 @@ export default function App() {
             </p>
           </div>
           <div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-            <img src="/clinic-hero.webp" alt="Αίθουσα θεραπείας με οδοντιατρική έδρα" className="h-[200px] md:h-[400px] lg:h-[540px] w-full rounded-[2.2rem] object-cover" />
+            <img loading="lazy" src="/clinic-hero.webp" alt="Αίθουσα θεραπείας με οδοντιατρική έδρα" className="h-[200px] md:h-[400px] lg:h-[540px] w-full rounded-[2.2rem] object-cover" />
             <div className="grid grid-cols-2 gap-3 sm:gap-5">
-              <img src="/clinic-waiting-blue.webp" alt="Χώρος αναμονής" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
-              <img src="/clinic-hall.webp" alt="Υποδοχή και διάδρομος" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
-              <img src="/clinic-treatment.webp" alt="Οδοντιατρική θεραπεία" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
-              <img src="/clinic-consult.webp" alt="Συζήτηση με ασθενή" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
+              <img loading="lazy" src="/clinic-waiting-blue.webp" alt="Χώρος αναμονής" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
+              <img loading="lazy" src="/clinic-hall.webp" alt="Υποδοχή και διάδρομος" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
+              <img loading="lazy" src="/clinic-treatment.webp" alt="Οδοντιατρική θεραπεία" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
+              <img loading="lazy" src="/clinic-consult.webp" alt="Συζήτηση με ασθενή" className="h-[120px] md:h-[220px] lg:h-[260px] w-full rounded-[1.2rem] sm:rounded-[1.8rem] object-cover" />
             </div>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-3 sm:mt-5 sm:gap-5">
-            <img src="/clinic-xray.webp" alt="Ψηφιακή ακτινογραφία" className="h-24 sm:h-48 md:h-60 lg:h-72 w-full rounded-[1rem] sm:rounded-[1.8rem] object-cover" />
-            <img src="/clinic-lounge.webp" alt="Άνετος χώρος αναμονής" className="h-24 sm:h-48 md:h-60 lg:h-72 w-full rounded-[1rem] sm:rounded-[1.8rem] object-cover" />
-            <img src="/chrysa-doctor.webp" alt="Χρύσα Χατζημεών" className="h-24 sm:h-48 md:h-60 lg:h-72 w-full rounded-[1rem] sm:rounded-[1.8rem] object-cover object-[50%_20%]" />
+            <img loading="lazy" src="/clinic-xray.webp" alt="Ψηφιακή ακτινογραφία" className="h-24 sm:h-48 md:h-60 lg:h-72 w-full rounded-[1rem] sm:rounded-[1.8rem] object-cover" />
+            <img loading="lazy" src="/clinic-lounge.webp" alt="Άνετος χώρος αναμονής" className="h-24 sm:h-48 md:h-60 lg:h-72 w-full rounded-[1rem] sm:rounded-[1.8rem] object-cover" />
+            <img loading="lazy" src="/chrysa-doctor.webp" alt="Χρύσα Χατζημεών" className="h-24 sm:h-48 md:h-60 lg:h-72 w-full rounded-[1rem] sm:rounded-[1.8rem] object-cover object-[50%_20%]" />
           </div>
         </div>
       </section>
@@ -190,12 +192,12 @@ export default function App() {
             </p>
           </div>
           <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <img src="/clinic-waiting-blue.webp" alt="Χώρος αναμονής" className="h-[300px] md:h-[420px] lg:h-[560px] w-full rounded-[2.2rem] object-cover" />
+            <img loading="lazy" src="/clinic-waiting-blue.webp" alt="Χώρος αναμονής" className="h-[220px] md:h-[420px] lg:h-[560px] w-full rounded-[2.2rem] object-cover" />
             <div className="grid gap-5">
-              <img src="/clinic-hall.webp" alt="Υποδοχή οδοντιατρείου" className="h-[180px] md:h-[220px] lg:h-[270px] w-full rounded-[2.2rem] object-cover" />
-              <div className="grid gap-5 sm:grid-cols-2">
-                <img src="/clinic-xray.webp" alt="Ψηφιακή διάγνωση" className="h-[180px] md:h-[220px] lg:h-[270px] w-full rounded-[2.2rem] object-cover" />
-                <img src="/clinic-lounge.webp" alt="Άνετη αναμονή" className="h-[180px] md:h-[220px] lg:h-[270px] w-full rounded-[2.2rem] object-cover" />
+              <img loading="lazy" src="/clinic-hall.webp" alt="Υποδοχή οδοντιατρείου" className="h-[140px] md:h-[220px] lg:h-[270px] w-full rounded-[2.2rem] object-cover" />
+              <div className="grid grid-cols-2 gap-3 sm:gap-5">
+                <img loading="lazy" src="/clinic-xray.webp" alt="Ψηφιακή διάγνωση" className="h-[120px] md:h-[220px] lg:h-[270px] w-full rounded-[2.2rem] object-cover" />
+                <img loading="lazy" src="/clinic-lounge.webp" alt="Άνετη αναμονή" className="h-[120px] md:h-[220px] lg:h-[270px] w-full rounded-[2.2rem] object-cover" />
               </div>
             </div>
           </div>
@@ -204,7 +206,7 @@ export default function App() {
 
       <section id="Γιατρός" className="bg-[#fbf4ed] px-5 py-24 sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-[1500px] gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-          <img src="/chrysa-doctor.webp" alt="Χρύσα Χατζημεών" className="h-[380px] md:h-[540px] lg:h-[720px] w-full rounded-[2.4rem] object-cover object-[50%_20%]" />
+          <img loading="lazy" src="/chrysa-doctor.webp" alt="Χρύσα Χατζημεών" className="h-[260px] md:h-[540px] lg:h-[720px] w-full rounded-[2.4rem] object-cover object-[50%_20%]" />
           <div>
             <p className="mb-6 text-sm font-semibold uppercase tracking-[0.24em] text-[#7e6f67]">Χρύσα Χατζημεών</p>
             <h2 className="text-[12vw] font-extralight uppercase leading-[0.95] tracking-[-0.07em] sm:text-[7vw] lg:text-[5.8rem]">
@@ -216,8 +218,8 @@ export default function App() {
               γίνεται προσωπική, καθαρή και ανθρώπινη.
             </p>
             <div className="mt-10 grid gap-5 sm:grid-cols-3">
-              <img src="/clinic-treatment.webp" alt="Θεραπεία" className="h-40 md:h-48 lg:h-60 rounded-[1.6rem] object-cover" />
-              <img src="/clinic-consult.webp" alt="Συζήτηση θεραπείας" className="h-40 md:h-48 lg:h-60 rounded-[1.6rem] object-cover" />
+              <img loading="lazy" src="/clinic-treatment.webp" alt="Θεραπεία" className="h-40 md:h-48 lg:h-60 rounded-[1.6rem] object-cover" />
+              <img loading="lazy" src="/clinic-consult.webp" alt="Συζήτηση θεραπείας" className="h-40 md:h-48 lg:h-60 rounded-[1.6rem] object-cover" />
               <div className="rounded-[1.6rem] bg-[#d7edf5] p-7">
                 <Star className="mb-16 fill-[#2d2d2d]" />
                 <p className="text-4xl font-light">10.0</p>
@@ -240,12 +242,60 @@ export default function App() {
           </div>
           <div className="divide-y divide-[#d5e9f1] border-y border-[#d5e9f1]">
             {services.map((service, index) => (
-              <a key={service} href="#Ραντεβού" className="group grid gap-4 py-7 text-[#2d2d2d] transition hover:bg-white/60 sm:grid-cols-[90px_1fr_auto] sm:items-center">
+              <a key={service} href={service === 'Λεύκανση' ? '#Λεύκανση' : '#Ραντεβού'} className="group grid gap-4 py-7 text-[#2d2d2d] transition hover:bg-white/60 sm:grid-cols-[90px_1fr_auto] sm:items-center">
                 <span className="text-xl text-[#7e6f67]">{String(index + 1).padStart(2, "0")}</span>
-                <span className="text-4xl font-light leading-none sm:text-6xl">{service}</span>
+                <span className="text-2xl font-light leading-none sm:text-4xl lg:text-6xl">{service}</span>
                 <ArrowUpRight className="transition group-hover:translate-x-1 group-hover:-translate-y-1" />
               </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="Λεύκανση" className="bg-[#fbf4ed] px-5 py-24 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1500px]">
+          <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_0.6fr] lg:items-end">
+            <h2 className="text-[12vw] font-extralight uppercase leading-[0.92] tracking-[-0.07em] sm:text-[8vw] lg:text-[6.5rem]">
+              Αποτελέσματα
+              <span className="mx-4 text-[0.42em] normal-case italic tracking-[-0.04em] text-[#7e6f67]">που μιλούν</span>
+              <br />από μόνα τους
+            </h2>
+            <p className="text-xl leading-9 text-[#5c5c5c]">
+              Δείτε τη διαφορά πριν και μετά από θεραπεία λεύκανσης στο ιατρείο μας. Σύρετε το βέλος για να συγκρίνετε το αποτέλεσμα.
+            </p>
+          </div>
+          <div
+            className="relative mx-auto max-w-4xl overflow-hidden rounded-[2.4rem] select-none cursor-col-resize"
+            onMouseMove={(e) => {
+              if (e.buttons === 1) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setSliderPos(Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100)));
+              }
+            }}
+            onTouchMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const touch = e.touches[0];
+              setSliderPos(Math.min(100, Math.max(0, ((touch.clientX - rect.left) / rect.width) * 100)));
+            }}
+          >
+            <img loading="lazy" src="/after-smile.webp" alt="Μετά τη λεύκανση" className="block w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover" />
+            <div
+              className="absolute inset-0 overflow-hidden"
+              style={{ width: `${sliderPos}%` }}
+            >
+              <img loading="lazy" src="/before-smile.webp" alt="Πριν τη λεύκανση" className="block h-[300px] sm:h-[400px] lg:h-[520px] object-cover" style={{ width: `${10000 / Math.max(sliderPos, 1)}%` }} />
+            </div>
+            <div
+              className="absolute inset-y-0 z-10 flex items-center"
+              style={{ left: `${sliderPos}%`, transform: 'translateX(-50%)' }}
+            >
+              <div className="h-full w-[3px] bg-white shadow-lg" />
+              <div className="absolute top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-white shadow-lg">
+                <span className="text-sm font-bold text-[#2d2d2d]">↔</span>
+              </div>
+            </div>
+            <span className="absolute bottom-4 left-4 rounded-full bg-[#2d2d2d]/80 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">ΠΡΙΝ</span>
+            <span className="absolute bottom-4 right-4 rounded-full bg-[#2d2d2d]/80 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">ΜΕΤΑ</span>
           </div>
         </div>
       </section>
@@ -262,7 +312,7 @@ export default function App() {
             {reviews.map((review, index) => (
               <article key={review} className="rounded-[2rem] bg-white/8 p-8">
                 <p className="mb-8 text-[#8cc7de]">( {String(index + 1).padStart(2, "0")} )</p>
-                <p className="text-3xl font-light leading-tight">{review}</p>
+                <p className="text-xl font-light leading-tight sm:text-2xl lg:text-3xl">{review}</p>
               </article>
             ))}
           </div>
@@ -294,13 +344,19 @@ export default function App() {
 
       <footer className="bg-[#2d2d2d] py-8 text-center text-xs uppercase tracking-widest text-white/40 border-t border-white/5">
         <div className="mx-auto max-w-[1500px] px-5 flex flex-col gap-4 sm:flex-row sm:justify-between items-center">
-          <p>© 2026 Dr. Chrysa Chatzimeon. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Dr. Chrysa Chatzimeon. All rights reserved.</p>
           <div className="flex gap-5">
             <button
               onClick={() => setShowCookies(true)}
               className="hover:text-[#8cc7de] transition underline decoration-dotted cursor-pointer"
             >
               Ρυθμίσεις Cookies
+            </button>
+            <button
+              onClick={() => setShowTerms(true)}
+              className="hover:text-[#8cc7de] transition underline decoration-dotted cursor-pointer"
+            >
+              Όροι Χρήσης
             </button>
             <button
               onClick={() => setShowPrivacy(true)}
@@ -313,9 +369,14 @@ export default function App() {
       </footer>
 
       {showCookies && (
-        <div className="fixed bottom-5 inset-x-5 z-[100] mx-auto max-w-lg rounded-[2rem] bg-[#2d2d2d] p-6 text-[#f3fbff] shadow-2xl md:bottom-8">
-          <h3 className="mb-2 text-lg font-medium">Χρήση Cookies</h3>
-          <p className="mb-4 text-xs leading-relaxed text-[#d8eaf1]">
+        <div className="fixed bottom-3 inset-x-3 sm:bottom-5 sm:inset-x-5 z-[100] mx-auto max-w-lg rounded-[1.5rem] sm:rounded-[2rem] bg-[#2d2d2d] p-4 sm:p-6 text-[#f3fbff] shadow-2xl md:bottom-8">
+          <h3 className="mb-2 text-base sm:text-lg font-medium">Χρήση Cookies</h3>
+          {localStorage.getItem('cookie_consent') && (
+            <p className="mb-2 text-[10px] uppercase tracking-wider text-[#8cc7de]">
+              Τρέχουσα επιλογή: {localStorage.getItem('cookie_consent') === 'accepted' ? 'Αποδεκτά' : 'Απορρίφθηκαν'}
+            </p>
+          )}
+          <p className="mb-4 text-[11px] sm:text-xs leading-relaxed text-[#d8eaf1]">
             Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία περιήγησής σας στο ιατρείο μας. Συνεχίζοντας, συμφωνείτε με τη χρήση τους.
           </p>
           <div className="flex gap-3 justify-end">
@@ -324,7 +385,7 @@ export default function App() {
                 localStorage.setItem("cookie_consent", "declined");
                 setShowCookies(false);
               }}
-              className="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-wider text-white hover:bg-white/10 transition"
+              className="rounded-full border border-white/20 px-4 sm:px-5 py-2 text-[11px] sm:text-xs uppercase tracking-wider text-white hover:bg-white/10 transition"
             >
               Απόρριψη
             </button>
@@ -333,7 +394,7 @@ export default function App() {
                 localStorage.setItem("cookie_consent", "accepted");
                 setShowCookies(false);
               }}
-              className="rounded-full bg-[#8cc7de] px-5 py-2 text-xs uppercase tracking-wider text-[#2d2d2d] font-semibold hover:bg-[#a6d9ee] transition"
+              className="rounded-full bg-[#8cc7de] px-4 sm:px-5 py-2 text-[11px] sm:text-xs uppercase tracking-wider text-[#2d2d2d] font-semibold hover:bg-[#a6d9ee] transition"
             >
               Αποδοχή
             </button>
@@ -353,7 +414,7 @@ export default function App() {
             </button>
             <h2 className="mb-6 text-3xl font-light uppercase tracking-tight text-[#7e6f67]">Πολιτική Απορρήτου</h2>
             <div className="space-y-4 text-sm leading-relaxed text-[#5c5c5c]">
-              <p><strong>Τελευταία ενημέρωση: 23 Ιουνίου 2026</strong></p>
+              <p><strong>Τελευταία ενημέρωση: 24 Ιουνίου 2026</strong></p>
               <p>
                 Στο οδοντιατρείο της <strong>Dr. Χρύσας Χατζημεών</strong>, σεβόμαστε το απόρρητο των δεδομένων σας. Η παρούσα Πολιτική Απορρήτου εξηγεί πώς συλλέγουμε, χρησιμοποιούμε και προστατεύουμε τις προσωπικές σας πληροφορίες σύμφωνα με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR).
               </p>
@@ -361,22 +422,79 @@ export default function App() {
               <p>
                 Υπεύθυνος επεξεργασίας των δεδομένων σας είναι η Dr. Χρύσα Χατζημεών, με έδρα τη Γυθείου 22, Χαλάνδρι. Τηλέφωνο επικοινωνίας: 210 711 7021.
               </p>
-              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">2. Δεδομένα που Συλλέγουμε</h3>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">2. Νομική Βάση Επεξεργασίας</h3>
+              <p>
+                Η επεξεργασία των δεδομένων σας βασίζεται στη συγκατάθεσή σας (Άρθρο 6(1)(α) GDPR), στην εκτέλεση σύμβασης παροχής οδοντιατρικών υπηρεσιών (Άρθρο 6(1)(β)), και στη συμμόρφωσή μας με νομικές υποχρεώσεις (Άρθρο 6(1)(γ)).
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">3. Δεδομένα που Συλλέγουμε</h3>
               <p>
                 Εάν επικοινωνήσετε μαζί μας ή ζητήσετε ραντεβού, ενδέχεται να συλλέξουμε:
                 Ονοματεπώνυμο, αριθμό τηλεφώνου, διεύθυνση ηλεκτρονικού ταχυδρομείου (email) και πληροφορίες σχετικά με το ιατρικό ιστορικό σας (κατόπιν δικής σας συγκατάθεσης για την παροχή οδοντιατρικής φροντίδας).
               </p>
-              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">3. Σκοπός Επεξεργασίας</h3>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">4. Σκοπός Επεξεργασίας</h3>
               <p>
                 Χρησιμοποιούμε τα δεδομένα σας αποκλειστικά για τον προγραμματισμό των ραντεβού σας, την επικοινωνία μαζί σας και την παροχή των ζητούμενων οδοντιατρικών υπηρεσιών.
               </p>
-              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">4. Ιατρικό Απόρρητο</h3>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">5. Ιατρικό Απόρρητο</h3>
               <p>
                 Όλα τα ιατρικά σας δεδομένα προστατεύονται από το ιατρικό απόρρητο και δεν κοινοποιούνται σε τρίτους χωρίς τη ρητή γραπτή συγκατάθεσή σας, εκτός εάν απαιτείται από το νόμο.
               </p>
-              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">5. Τα Δικαιώματά σας</h3>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">6. Χρόνος Διατήρησης Δεδομένων</h3>
+              <p>
+                Τα δεδομένα σας διατηρούνται για όσο χρόνο είναι απαραίτητο για την εκπλήρωση των σκοπών συλλογής τους ή για όσο απαιτείται από την ισχύουσα νομοθεσία. Τα ιατρικά αρχεία τηρούνται σύμφωνα με τις απαιτήσεις του νόμου για ιατρικά δεδομένα.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">7. Τα Δικαιώματά σας</h3>
               <p>
                 Έχετε το δικαίωμα πρόσβασης, διόρθωσης, διαγραφής («δικαίωμα στη λήθη»), περιορισμού της επεξεργασίας και εναντίωσης στην επεξεργασία των προσωπικών σας δεδομένων. Μπορείτε να ασκήσετε αυτά τα δικαιώματα επικοινωνώντας μαζί μας.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">8. Δικαίωμα Υποβολής Καταγγελίας</h3>
+              <p>
+                Εάν θεωρείτε ότι η επεξεργασία των δεδομένων σας παραβιάζει τον GDPR, έχετε δικαίωμα υποβολής καταγγελίας στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (ΑΠΔΠΧ), Κηφισίας 1-3, Τ.Κ. 115 23, Αθήνα — <a href="https://www.dpa.gr" target="_blank" rel="noopener noreferrer" className="text-[#7e6f67] underline">www.dpa.gr</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showTerms && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/60 p-5 backdrop-blur-sm">
+          <div className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[2.5rem] bg-white p-6 shadow-2xl sm:p-10 text-[#2d2d2d]">
+            <button
+              onClick={() => setShowTerms(false)}
+              className="absolute right-6 top-6 grid h-10 w-10 place-items-center rounded-full bg-[#f3fbff] hover:bg-[#e4f5fe] transition cursor-pointer"
+              aria-label="Κλείσιμο"
+            >
+              <X size={20} />
+            </button>
+            <h2 className="mb-6 text-3xl font-light uppercase tracking-tight text-[#7e6f67]">Όροι Χρήσης</h2>
+            <div className="space-y-4 text-sm leading-relaxed text-[#5c5c5c]">
+              <p><strong>Τελευταία ενημέρωση: 24 Ιουνίου 2026</strong></p>
+              <p>
+                Η χρήση αυτού του ιστότοπου υπόκειται στους παρακάτω όρους. Με την πρόσβαση και χρήση του ιστότοπου, αποδέχεστε πλήρως τους παρόντες όρους.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">1. Γενικές Πληροφορίες</h3>
+              <p>
+                Ο ιστότοπος λειτουργεί από το οδοντιατρείο της Dr. Χρύσας Χατζημεών, Γυθείου 22, Χαλάνδρι, Αττική. Σκοπός του είναι η παροχή πληροφοριών σχετικά με τις οδοντιατρικές υπηρεσίες μας και η διευκόλυνση επικοινωνίας.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">2. Πνευματική Ιδιοκτησία</h3>
+              <p>
+                Όλο το περιεχόμενο αυτού του ιστότοπου (κείμενα, εικόνες, γραφικά, λογότυπα) προστατεύεται από τους νόμους περί πνευματικής ιδιοκτησίας. Απαγορεύεται η αναπαραγωγή, αντιγραφή ή διανομή χωρίς γραπτή άδεια.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">3. Ιατρική Αποποίηση</h3>
+              <p>
+                Οι πληροφορίες στον ιστότοπο παρέχονται για ενημερωτικούς σκοπούς και δεν αποτελούν ιατρική συμβουλή. Για εξατομικευμένη διάγνωση και θεραπεία, απευθυνθείτε στο ιατρείο μας.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">4. Περιορισμός Ευθύνης</h3>
+              <p>
+                Καταβάλλουμε κάθε προσπάθεια για την ακρίβεια των πληροφοριών. Ωστόσο, δεν εγγυόμαστε την πληρότητα ή καταλληλότητά τους. Η χρήση του ιστότοπου γίνεται με δική σας ευθύνη.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">5. Εφαρμοστέο Δίκαιο</h3>
+              <p>
+                Οι παρόντες όροι διέπονται από το Ελληνικό Δίκαιο. Για οποιαδήποτε διαφορά, αρμόδια είναι τα δικαστήρια Αθηνών.
+              </p>
+              <h3 className="text-base font-semibold text-[#2d2d2d] mt-4">6. Επικοινωνία</h3>
+              <p>
+                Για ερωτήσεις σχετικά με τους παρόντες όρους, επικοινωνήστε μαζί μας στο τηλέφωνο 210 711 7021 ή επισκεφθείτε μας στη Γυθείου 22, Χαλάνδρι.
               </p>
             </div>
           </div>
