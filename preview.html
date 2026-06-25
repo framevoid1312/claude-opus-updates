@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; frame-src https://maps.google.com https://www.google.com; connect-src 'self'" />
     <style>
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -407,7 +408,7 @@
           <p style="margin-top:8px;display:flex;align-items:center;gap:8px;color:#5c5c5c"><span style="font-size:18px">📞</span> <a href="tel:+302107117021" style="color:#2d2d2d;text-decoration:none">210 711 7021</a></p>
           <p style="margin-top:8px;display:flex;align-items:center;gap:8px;color:#5c5c5c"><span style="font-size:18px">🅿️</span> Δεν διαθέτουμε parking</p>
           <div style="margin-top:20px;border-radius:20px;overflow:hidden;height:200px">
-            <iframe src="https://maps.google.com/maps?q=%CE%93%CF%85%CE%B8%CE%B5%CE%AF%CE%BF%CF%85+22%2C+%CE%A7%CE%B1%CE%BB%CE%AC%CE%BD%CE%B4%CF%81%CE%B9&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://maps.google.com/maps?q=%CE%93%CF%85%CE%B8%CE%B5%CE%AF%CE%BF%CF%85+22%2C+%CE%A7%CE%B1%CE%BB%CE%AC%CE%BD%CE%B4%CF%81%CE%B9&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-scripts allow-same-origin"></iframe>
           </div>
         </div>
         <div class="slots" id="bookingPanel">
@@ -837,6 +838,13 @@
 
       let pickedStars = 0;
 
+      // Security: escape HTML to prevent XSS
+      function escapeHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
       function getAllReviews() {
         const stored = JSON.parse(localStorage.getItem('user_reviews') || '[]');
         return [...stored, ...BASE_REVIEWS];
@@ -847,9 +855,9 @@
         const list = document.getElementById('reviewsList');
         list.innerHTML = all.map(r => `
           <div class="rv-card">
-            <div class="rv-head"><span class="rv-name">${r.name}</span><span class="rv-date">${r.date}</span></div>
-            <div class="rv-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
-            <p class="rv-text">${r.text}</p>
+            <div class="rv-head"><span class="rv-name">${escapeHTML(r.name)}</span><span class="rv-date">${escapeHTML(r.date)}</span></div>
+            <div class="rv-stars">${'★'.repeat(Math.min(Math.max(parseInt(r.stars)||0,0),5))}${'☆'.repeat(5 - Math.min(Math.max(parseInt(r.stars)||0,0),5))}</div>
+            <p class="rv-text">${escapeHTML(r.text)}</p>
           </div>
         `).join('');
         document.getElementById('reviewCountLabel').textContent = all.length + ' αξιολογήσεις';
@@ -1022,12 +1030,19 @@
 
         const dayName = DAYS_GR[selectedDate.getDay()];
         const monthName = MONTHS_GR[selectedDate.getMonth()];
-        let details = '<strong>' + name + '</strong><br>';
-        details += dayName + ', ' + selectedDate.getDate() + ' ' + monthName + ' ' + selectedDate.getFullYear() + ' στις ' + selectedTime + '<br>';
-        details += 'Τηλέφωνο: ' + phone;
-        if (service) details += '<br>Υπηρεσία: ' + service;
-
-        document.getElementById('confirmDetails').innerHTML = details;
+        const container = document.getElementById('confirmDetails');
+        container.innerHTML = '';
+        const b = document.createElement('strong');
+        b.textContent = name;
+        container.appendChild(b);
+        container.appendChild(document.createElement('br'));
+        container.appendChild(document.createTextNode(dayName + ', ' + selectedDate.getDate() + ' ' + monthName + ' ' + selectedDate.getFullYear() + ' στις ' + selectedTime));
+        container.appendChild(document.createElement('br'));
+        container.appendChild(document.createTextNode('Τηλέφωνο: ' + phone));
+        if (service) {
+          container.appendChild(document.createElement('br'));
+          container.appendChild(document.createTextNode('Υπηρεσία: ' + service));
+        }
         goStep(4);
       }
 
